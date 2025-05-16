@@ -1,0 +1,68 @@
+:root{
+    --landing-page-background-color : white;
+    --landing-page-text-color : #333;
+    --landing-page-text-color-hover : #1b85f6;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: var(--landing-page-background-color);
+}
+
+#container{
+width: 100%;
+padding: 0 2rem;
+}
+
+nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    padding: 0 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    background-color: white;
+}
+
+.logo-section .darasa-logo{
+    height: 50px;
+    width:auto;
+}
+
+.nav-links{
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+
+.nav-links .link a{
+    text-decoration: none;
+    color: var(--landing-page-text-color);
+    font-weight: 500;
+    transition: var(--landing-page-text-color) 0.3s ease;
+}
+
+
+.nav-links .link a:hover {
+  color: var(--landing-page-text-color-hover);
+}
+
+.cta-button {
+  background-color: #007bff;
+  color: white;
+  padding: 0.6rem 1.4rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #0056b3;
+}
