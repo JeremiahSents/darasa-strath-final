@@ -90,9 +90,9 @@ nav {
 
 #hero {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding: 4rem 2rem;
+  padding: 1rem 1.5rem;
   background-color: var(--landing-page-background-color);
   position: relative;
   overflow: hidden;
@@ -104,10 +104,10 @@ nav {
 }
 
 .hero-text h1 {
-  font-size: 3.2rem;
-  font-weight: 700;
-  line-height: 1.2;
-  margin-bottom: 1.5rem;
+  font-size: 3rem;
+  font-weight: 650;
+  line-height: 1;
+  margin-bottom: 1rem;
   color: #222;
 }
 
@@ -116,16 +116,16 @@ nav {
 }
 
 .hero-text p {
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: #555;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   max-width: 90%;
 }
 
 .hero-buttons {
   display: flex;
   gap: 1rem;
-  margin-top: 2rem;
+  margin-top: 1.3rem;
 }
 
 .hero-buttons .cta-button {
@@ -169,14 +169,14 @@ nav {
 }
 
 #features {
-  padding: 60px 20px;
+  padding: 20px 20px;
   text-align: center;
   max-width: 1200px;
   margin: 0 auto;
 }
 
 #features h2 {
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   font-size: 2.2rem;
   font-weight: 600;
   color: #333;
@@ -208,7 +208,7 @@ nav {
   background-color: #f0f3ff;
   width: 80px;
   height: 80px;
-  border-radius: 50%;
+  border-radius: 30%;
   display: flex;
   align-items: center;
   justify-content: center;
