@@ -1,7 +1,8 @@
 :root{
-    --landing-page-background-color : white;
+    --landing-page-background-color : rgba(255, 255, 255, 0.936);
     --landing-page-text-color : #333;
-    --landing-page-text-color-hover : #1b85f6;
+    --landing-page-text-color-hover : #dda31c;
+    --navBackground-color : #4378bc;
 }
 
 *{
@@ -16,7 +17,8 @@ body{
 
 #container{
 width: 100%;
-padding: 0 2rem;
+padding: 8px 2rem;
+
 }
 
 nav{
@@ -26,7 +28,7 @@ nav{
     height: 80px;
     padding: 0 2rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    background-color: white;
+    background-color: var(--navBackground-color);
 }
 
 .logo-section .darasa-logo{
@@ -42,9 +44,9 @@ nav{
 
 .nav-links .link a{
     text-decoration: none;
-    color: var(--landing-page-text-color);
+    color: white;
     font-weight: 500;
-    transition: var(--landing-page-text-color) 0.3s ease;
+    transition: var(--landing-page-text-color-hover) 0.3s ease;
 }
 
 
@@ -53,16 +55,16 @@ nav{
 }
 
 .cta-button {
-  background-color: #007bff;
+  background-color:#2f59a7;
   color: white;
   padding: 0.6rem 1.4rem;
   border: none;
   border-radius: 8px;
   font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: var(--landing-page-text-color-hover) 0.3s ease;
 }
 
 .cta-button:hover {
-  background-color: #0056b3;
+  background-color: #e3b242e3;
 }
