@@ -1,71 +1,181 @@
-:root{
-    --landing-page-background-color : rgba(255, 255, 255, 0.936);
-    --landing-page-text-color : #333;
-    --landing-page-text-color-hover : #0457F1;
-    --cta-background-color : #02338D;
-    --cta-background-color-hover : #0457F1;
-
+:root {
+  --landing-page-background-color: #f0f4ff;
+  --landing-page-text-color: #333;
+  --landing-page-text-color-hover: #0457F1;
+  --cta-background-color: #02338D;
+  --cta-background-color-hover: #0457F1;
 }
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-body{
-    background-color: var(--landing-page-background-color);
+body {
+  background-color: var(--landing-page-background-color);
+  font-family: poppins, sans-serif;
+  color: var(--landing-page-text-color);
+  line-height: 1.6;
 }
 
-#container{
-width: 100%;
-padding: 8px 2rem;
-
+#container {
+  width: 100%;
+  padding: 8px 2rem;
 }
 
-nav{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 80px;
-    padding: 0 2rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  padding: 0 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  background-color: var(--landing-page-background-color);
 }
 
-.logo-section .darasa-logo{
-    height: 50px;
-    width:auto;
+.logo-section .darasa-logo {
+  height: 50px;
+  width: auto;
 }
 
-.nav-links{
-    display: flex;
-    gap: 2rem;
-    list-style: none;
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
 }
 
-.nav-links .link a{
-    text-decoration: none;
-    color: black;
-    font-weight: 500;
-    transition: var(--landing-page-text-color-hover) 0.3s ease;
+.nav-links .link a {
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+  transition: color 0.3s ease;
 }
-
 
 .nav-links .link a:hover {
   color: var(--landing-page-text-color-hover);
 }
 
 .cta-button {
-  background-color:var(--cta-background-color);
+  background-color: var(--cta-background-color);
   color: white;
   padding: 0.6rem 1.4rem;
   border: none;
   border-radius: 8px;
   font-size: 1rem;
   cursor: pointer;
-  transition: var(--landing-page-text-color-hover) 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
 .cta-button:hover {
   background-color: var(--cta-background-color-hover);
+}
+
+.secondary-button {
+  background-color: transparent;
+  border: 2px solid var(--cta-background-color);
+  color: var(--cta-background-color);
+  padding: 0.6rem 1.4rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-left: 1rem;
+  transition: all 0.3s ease;
+}
+
+.secondary-button:hover {
+  background-color: var(--cta-background-color);
+  color: white;
+}
+
+#hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4rem 2rem;
+  background-color: #f0f4ff;
+}
+
+.hero-text {
+  max-width: 50%;
+}
+
+.hero-text h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.hero-text .span-text {
+  color: var(--cta-background-color);
+}
+
+.hero-image img {
+  max-width: 100%;
+  height: auto;
+}
+
+#features {
+  padding: 4rem 2rem;
+  text-align: center;
+  background-color: #fff;
+}
+
+#features h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.feature {
+  background-color: #f9f9f9;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+}
+
+.feature img {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 1rem;
+}
+
+.feature h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+#about, #contact {
+  padding: 4rem 2rem;
+  background-color: #f8f9fb;
+  text-align: center;
+}
+
+footer {
+  background-color: #021c48;
+  color: white;
+  padding: 2rem;
+  text-align: center;
+}
+
+footer .social-links {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 1rem 0;
+}
+
+footer .social-links li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+footer .social-links li a:hover {
+  color: var(--landing-page-text-color-hover);
 }
