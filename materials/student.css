@@ -61,6 +61,7 @@ body.main-body{
 
 .card-link{
     text-decoration: none;
+    color: black;
 }
 
 .card{
@@ -103,6 +104,7 @@ body.main-body{
 .card *{
     position: relative;
     z-index: 1;
+    color: black;
 }
 
 .text-content{
@@ -121,8 +123,8 @@ body.main-body{
 }
 
 .unit-icon{
-    width: 40px;
-    height: 40px;
+    width: 90px;
+    height: 90px;
     transition: transform 0.3s;
 }
 
@@ -141,6 +143,6 @@ body.main-body{
 }
 
 .meet-icon{
-    width: 16px;
-    height: 16px;
+    width: 60px;
+    height: 60px;
 }
