@@ -1,14 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard | Student</title>
-    <link rel="stylesheet" href="dashboard.css">
-    <link rel="stylesheet" href="/global.css">
-    <link rel="icon" href="/assets/images/logo.png">
-</head>
-<body>
-    
-</body>
+    <link rel="stylesheet" href="dashboard.css" />
+    <link rel="stylesheet" href="/global.css" />
+    <link rel="icon" href="/assets/images/logo_white.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="dashboard">
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <div class="logo">
+          <img src="/assets/images/logo_blue.png" alt="Darasa logo" />
+          <span>Darasa</span>
+        </div>
+        <nav class="nav-menu">
+          <div class="nav-top">
+            <ul>
+              <li class="active">
+                <a href="#"><i class="fas fa-home"></i> HOME</a>
+              </li>
+              <li>
+                <a href="#"><i class="fas fa-tasks"></i> ASSIGNMENTS</a>
+              </li>
+            </ul>
+          </div>
+          <div class="nav-bottom">
+            <ul>
+              <li>
+                <a href="#"><i class="fas fa-user-cog"></i> ACCOUNT</a>
+              </li>
+              <li>
+                <a href="#"><i class="fas fa-sign-out-alt"></i> LOGOUT</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <header class="header">
+          <div class="welcome">
+            <h2>WELCOME JOLENE!</h2>
+          </div>
+        </header>
+        <div class="dashboard-content">
+          <div class="courses-section">
+            <div class="course-card">
+              <div class="course-header" style="background-color: #1967d2">
+                <div class="course-number">WEB-101</div>
+                <div class="course-title">Web Development Fundamentals</div>
+              </div>
+              <div class="course-content">
+                <div class="course-info">
+                  <i class="fas fa-user-tie"></i> Prof. John Smith
+                </div>
+                <div class="course-info">
+                  <i class="fas fa-calendar"></i> Spring 2025
+                </div>
+                <button class="view-coursework-btn">View Coursework</button>
+              </div>
+            </div>
+            <div class="course-card">
+              <div class="course-header" style="background-color: #1e8e3e">
+                <div class="course-number">CS-201</div>
+                <div class="course-title">Advanced Programming</div>
+              </div>
+              <div class="course-content">
+                <div class="course-info">
+                  <i class="fas fa-user-tie"></i> Dr. Sarah Johnson
+                </div>
+                <div class="course-info">
+                  <i class="fas fa-calendar"></i> Spring 2025
+                </div>
+                <button class="view-coursework-btn">View Coursework</button>
+              </div>
+            </div>
+            <div class="course-card">
+              <div class="course-header" style="background-color: #d93025">
+                <div class="course-number">DB-301</div>
+                <div class="course-title">Database Management</div>
+              </div>
+              <div class="course-content">
+                <div class="course-info">
+                  <i class="fas fa-user-tie"></i> Prof. Michael Lee
+                </div>
+                <div class="course-info">
+                  <i class="fas fa-calendar"></i> Spring 2025
+                </div>
+                <button class="view-coursework-btn">View Coursework</button>
+              </div>
+            </div>
+          </div>
+          <div class="right-sidebar">
+            <div class="todo-section">
+              <div class="section-header">
+                <h3>TO DO LIST</h3>
+                <button class="add-todo-btn">
+                  <i class="fas fa-plus"></i>
+                </button>
+              </div>
+              <div class="todo-list">
+                <div class="todo-item">
+                  <input type="checkbox" class="todo-checkbox" />
+                  <span class="todo-text"
+                    >Submit Web Development Assignment</span
+                  >
+                  <div class="todo-actions">
+                    <button class="edit-btn">
+                      <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="delete-btn">
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="upcoming-section">
+              <h3>UPCOMING CLASSES</h3>
+              <div class="upcoming-list">
+                <div class="upcoming-item">
+                  <div class="upcoming-header">
+                    <i class="fas fa-desktop"></i>
+                    <span class="course-code">WEB-101</span>
+                  </div>
+                  <div class="upcoming-details">
+                    <div><i class="fas fa-clock"></i> 10:00 AM - 12:00 PM</div>
+                    <div><i class="fas fa-map-marker-alt"></i> Room 2.12</div>
+                  </div>
+                </div>
+                <div class="upcoming-item">
+                  <div class="upcoming-header">
+                    <i class="fas fa-code"></i>
+                    <span class="course-code">CS-201</span>
+                  </div>
+                  <div class="upcoming-details">
+                    <div><i class="fas fa-clock"></i> 2:00 PM - 4:00 PM</div>
+                    <div><i class="fas fa-map-marker-alt"></i> Lab 3.15</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
