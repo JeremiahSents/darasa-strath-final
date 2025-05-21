@@ -1,17 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | teacher</title>
-    <link rel="stylesheet" href="dashboard.css">
-    <link rel="stylesheet" href="/global.css">
-    <link rel="icon" href="/assets/images/logo.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teacher Dashboard | Darasa</title>
+  <link rel="stylesheet" href="dashboard.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
-
 <body>
-
-</body>
-
-</html>
+  <div class="dashboard">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="logo">
+        <img src="assets/logo_blue.png" alt="Darasa Logo">
+        <span>Darasa</span>
+      </div>
+      
+      <nav class="nav-menu">
+        <div class="nav-top">
+          <ul>
+            <li class="active">
+              <a href="#">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Calendar</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fas fa-tasks"></i>
+                <span>Assignments</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fas fa-book"></i>
+                <span>Courses</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fas fa-users"></i>
+                <span>Students</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="nav-bottom">
+          <ul>
+            <li>
+              <a href="#">
+                <i class="fas fa-user-cog"></i>
+                <span>Account</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+      <header class="header">
+        <h2>Welcome, Prof. Smith!</h2>
+      </header>
+      
+      <div class="dashboard-content">
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+          <button class="create-button">
+            <i class="fas fa-plus"></i>
+            <span>Create Course</span>
+          </button>
+          <button class="create-button">
+            <i class="fas fa-bullhorn"></i>
+            <span>New Announcement</span>
+          </button>
+        </div>
+        
+        <!-- Stats Row -->
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-title">Active Courses</div>
+            <div class="stat-value">4</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-title">Total Students</div>
+            <div class="stat-value">89</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-title">Pending Assignments</div>
+            <div class="stat-value">12</div>
+          </div>
+        </div>
+        
+        <!-- Announcements -->
+        <div class="section-header">
+          <h3>Recent Announcements</h3>
+        </div>
+        
+        <div class="announcement-card">
+          <div class="announcement-header">
+            <div class="teacher-avatar">JS</div>
+            <div class="teacher-info">
+              <div class="teacher-name">Prof. John Smith</div>
+              <div class="post-date">Posted May 20, 2025</div>
+            </div>
+          </div>
+          <div class="announcement-content">
+            <p>Reminder: The midterm for Web Development Fundamentals will be next Tuesday. Please review chapters 1-5 and all coding examples we've covered in class.</p>
+          </div>
+        </div>
+        
+        <!-- Courses Section -->
+        <div class="section-header">
+          <h3>Your Courses</h3>
+        </div>
+        
+        <div class="courses-section">
+          <!-- Course Card 1 -->
+          <div class="course-card">
+            <div class="course-header" style="background-color: #1967d2;">
+              <div class="course-number">WEB-101</div>
+              <div class="course-title">Web Development Fundamentals</div>
+            </div>
+            <div class="course-content">
+              <div class="course-info">
+                <i class="fas fa-users"></i>
+                <span>32 Students</span>
+              </div>
+              <div class="course-info">
+                <i class="fas fa-calendar"></i>
+                <span>Spring 2025</span>
+              </div>
+              <button class="view-button">Manage Course</button>
+            </div>
+          </div>
+          
+          <!-- Course Card 2 -->
+          <div class="course-card">
+            <div class="course-header" style="background-color: #188038;">
+              <div class="course-number">WEB-201</div>
+              <div class="course-title">Advanced Web Applications</div>
+            </div>
+            <div class="course-content">
+              <div class="course-info">
+                <i class="fas fa-users"></i>
+                <span>28 Students</span>
+              </div>
+              <div class="course-info">
+                <i class="fas fa-calendar"></i>
+                <span>Spring 2025</span>
+              </div>
+              <button class="view-button">Manage Course</button>
+            </div>
+          </div>
+          
+          <!-- Course Card 3 -->
+          <div class="course-card">
+            <div class="course-header" style="background-color: #e37400;">
+              <div class="course-number">DEV-305</div>
+              <div class="course-title">Full Stack Development</div>
+            </div>
+            <div class="course-content">
+              <div class="course-info">
+                <i class="fas fa-users"></i>
+                <span>19 Students</span>
+              </div>
+              <div class="course-info">
+                <i class="fas fa-calendar"></i>
+                <span>Spring 2025</span>
+              </div>
+              <button class="view-button">Manage Course</button>
+            </div>
+          </div>
+          
+          <!--
