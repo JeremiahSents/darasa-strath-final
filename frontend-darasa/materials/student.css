@@ -27,6 +27,36 @@ body.main-body{
 .site-title{
     font-size: 1.5rem;
     font-weight: bold;
+    color: white;
+    text-decoration: none;
+}
+
+.header-right{
+    margin-left: auto;
+}
+
+.events-box{
+    background-color:#eef2ff;
+    color: #333;
+    padding: 0.75rem;
+    border-radius: 0.75rem;
+    padding: 1rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    min-width: 250px;
+    max-width: 300px;
+}
+
+.events-title{
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #1e3a8a;
+}
+
+.events-list{
+    list-style-type:disc;
+    padding-left: 1rem;
+    font-size: 0.87;
 }
 
 .container{
