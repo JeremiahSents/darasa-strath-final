@@ -1,5 +1,5 @@
 // API Configuration - Backend server URL
-const API_BASE_URL = 'http://localhost:3000';
+const API_BASE_URL = 'http://localhost:3000/api';
 
 // Debug: Log the API URL to make sure it's correct
 console.log('API Base URL:', API_BASE_URL);
@@ -13,10 +13,10 @@ const roleSelect = document.getElementById('role');
 const submitButton = document.querySelector('.btn');
 
 // Add event listener when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   // Handle form submission
   registerForm.addEventListener('submit', handleRegister);
-  
+
   // Add real-time validation
   emailInput.addEventListener('blur', validateEmail);
   passwordInput.addEventListener('input', validatePassword);
@@ -24,26 +24,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
 async function handleRegister(e) {
   e.preventDefault();
-  
+
   // Get form data
   const fullName = nameInput.value.trim();
   const email = emailInput.value.trim();
   const password = passwordInput.value.trim();
   const role = roleSelect.value;
-  
+
   // Validate form data
   const validationErrors = validateForm(fullName, email, password, role);
   if (validationErrors.length > 0) {
     showMessage(validationErrors.join('<br>'), 'error');
     return;
   }
-  
+
   // Disable submit button and show loading state
   setLoadingState(true);
-  
+
   try {
     console.log('Making request to:', `${API_BASE_URL}/auth/register`);
-    
+
     const response = await fetch(`${API_BASE_URL}/auth/register`, {
       method: 'POST',
       headers: {
@@ -56,30 +56,30 @@ async function handleRegister(e) {
         role: role
       })
     });
-    
+
     console.log('Response status:', response.status);
     console.log('Response URL:', response.url);
-    
+
     // Check if response is ok before trying to parse JSON
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    
+
     const data = await response.json();
-    
+
     if (data.success) {
       // Store token and user data
       localStorage.setItem('authToken', data.data.token);
       localStorage.setItem('userData', JSON.stringify(data.data.user));
-      
+
       showMessage('Registration successful! Redirecting...', 'success');
-      
+
       // Redirect after successful registration
       setTimeout(() => {
         // You can redirect to dashboard or home page
         window.location.href = '../dashboard.html'; // Adjust path as needed
       }, 2000);
-      
+
     } else {
       if (data.errors && Array.isArray(data.errors)) {
         const errorMessages = data.errors.map(err => err.msg).join('<br>');
@@ -88,7 +88,7 @@ async function handleRegister(e) {
         showMessage(data.message || 'Registration failed', 'error');
       }
     }
-    
+
   } catch (error) {
     console.error('Registration error:', error);
     showMessage('Network error. Please check your connection.', 'error');
@@ -99,35 +99,35 @@ async function handleRegister(e) {
 
 function validateForm(fullName, email, password, role) {
   const errors = [];
-  
+
   if (!fullName || fullName.length < 2) {
     errors.push('Full name must be at least 2 characters long');
   }
-  
+
   if (!email || !isValidEmail(email)) {
     errors.push('Please enter a valid email address');
   }
-  
+
   if (!password || password.length < 6) {
     errors.push('Password must be at least 6 characters long');
   }
-  
+
   if (!role || (role !== 'student' && role !== 'lecturer')) {
     errors.push('Please select a valid role');
   }
-  
+
   return errors;
 }
 
 function validateEmail() {
   const email = emailInput.value.trim();
   const errorElement = document.getElementById('email-error');
-  
+
   // Remove existing error
   if (errorElement) {
     errorElement.remove();
   }
-  
+
   if (email && !isValidEmail(email)) {
     showFieldError(emailInput, 'Please enter a valid email address');
   }
@@ -136,12 +136,12 @@ function validateEmail() {
 function validatePassword() {
   const password = passwordInput.value;
   const errorElement = document.getElementById('password-error');
-  
+
   // Remove existing error
   if (errorElement) {
     errorElement.remove();
   }
-  
+
   if (password && password.length < 6) {
     showFieldError(passwordInput, 'Password must be at least 6 characters long');
   }
@@ -158,7 +158,7 @@ function showFieldError(inputElement, message) {
     margin-top: 4px;
     margin-left: 8px;
   `;
-  
+
   inputElement.parentNode.insertBefore(errorDiv, inputElement.nextSibling);
 }
 
@@ -170,7 +170,7 @@ function isValidEmail(email) {
 function setLoadingState(isLoading) {
   const submitBtn = document.querySelector('.btn');
   const originalText = 'Sign Up';
-  
+
   if (isLoading) {
     submitBtn.disabled = true;
     submitBtn.innerHTML = `
@@ -192,12 +192,12 @@ function showMessage(message, type = 'info') {
   if (existingMessage) {
     existingMessage.remove();
   }
-  
+
   // Create message element
   const messageDiv = document.createElement('div');
   messageDiv.className = `message message-${type}`;
   messageDiv.innerHTML = message;
-  
+
   // Add styles
   messageDiv.style.cssText = `
     padding: 12px 16px;
@@ -209,10 +209,10 @@ function showMessage(message, type = 'info') {
     ${type === 'error' ? 'background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;' : ''}
     ${type === 'info' ? 'background: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb;' : ''}
   `;
-  
+
   // Insert message before the form
   registerForm.parentNode.insertBefore(messageDiv, registerForm);
-  
+
   // Auto-remove message after 5 seconds
   setTimeout(() => {
     if (messageDiv.parentNode) {
@@ -225,7 +225,7 @@ function showMessage(message, type = 'info') {
 function checkAuthStatus() {
   const token = localStorage.getItem('authToken');
   const userData = localStorage.getItem('userData');
-  
+
   if (token && userData) {
     // User is already logged in, redirect to dashboard
     window.location.href = '../dashboard.html';
