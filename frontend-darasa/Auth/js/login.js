@@ -1,5 +1,5 @@
 // API Configuration - Backend server URL
-const API_BASE_URL = 'http://localhost:3000';
+const API_BASE_URL = 'http://localhost:3000/api';
 
 // Debug: Log the API URL to make sure it's correct
 console.log('API Base URL:', API_BASE_URL);
@@ -39,7 +39,9 @@ async function handleLogin(e) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Accept': 'application/json'
       },
+      credentials: 'include', // Include cookies for session management
       body: JSON.stringify({
         email: email,
         password: password
@@ -53,30 +55,41 @@ async function handleLogin(e) {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
+
+    const responseText = await response.text();
+    console.log('Raw response:', responseText);
     
-    const data = await response.json();
-    
+    let data;
+    try {
+      data = JSON.parse(responseText);
+    } catch (e) {
+      console.error('Failed to parse response:', e);
+      throw new Error('Invalid response format');
+    }
+
+    if(!response.ok) {
+      throw new Error(data.message || `Login failed: ${response.status}`);
+    }
+
     if (data.success) {
-      // Store token and user data
+      // Store token and user data in localStorage
       localStorage.setItem('authToken', data.data.token);
       localStorage.setItem('userData', JSON.stringify(data.data.user));
-      
+
       showMessage('Login successful! Redirecting...', 'success');
-      
-      // Redirect after successful login
       setTimeout(() => {
-        // You can redirect to dashboard or home page
-        window.location.href = '../dashboard.html'; // Adjust path as needed
+        // Redirect to dashboard after a short delay
+        window.location.href = '../dashboard.html';
       }, 2000);
-      
-    } else {
-      showMessage(data.message || 'Login failed', 'error');
+    }else {
+      throw new Error(data.message || 'Login failed');
     }
-    
+
   } catch (error) {
-    console.error('Login error:', error);
-    showMessage('Network error. Please check your connection.', 'error');
-  } finally {
+    console.error('Login error details:', error);
+    showMessage(error.message || 'Login failed. Please try again.', 'error');
+  }finally {
+    // Re-enable submit button and reset loading state
     setLoadingState(false);
   }
 }
