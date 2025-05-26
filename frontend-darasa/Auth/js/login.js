@@ -48,48 +48,30 @@ async function handleLogin(e) {
       })
     });
     
-    console.log('Response status:', response.status);
-    console.log('Response URL:', response.url);
-    
-    // Check if response is ok before trying to parse JSON
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const responseText = await response.text();
-    console.log('Raw response:', responseText);
-    
-    let data;
-    try {
-      data = JSON.parse(responseText);
-    } catch (e) {
-      console.error('Failed to parse response:', e);
-      throw new Error('Invalid response format');
-    }
-
-    if(!response.ok) {
-      throw new Error(data.message || `Login failed: ${response.status}`);
-    }
+     const data = await response.json();
 
     if (data.success) {
-      // Store token and user data in localStorage
+      // Store token and user data
       localStorage.setItem('authToken', data.data.token);
       localStorage.setItem('userData', JSON.stringify(data.data.user));
 
       showMessage('Login successful! Redirecting...', 'success');
       setTimeout(() => {
-        // Redirect to dashboard after a short delay
-        window.location.href = '../dashboard.html';
+        // Redirect to appropriate dashboard based on user role
+        const user = data.data.user;
+        const dashboardPath = user.role === 'teacher' 
+          ? '../dashboard/teacher.html' 
+          : '../dashboard/student.html';
+        window.location.href = dashboardPath;
       }, 2000);
-    }else {
+    } else {
       throw new Error(data.message || 'Login failed');
     }
 
   } catch (error) {
     console.error('Login error details:', error);
     showMessage(error.message || 'Login failed. Please try again.', 'error');
-  }finally {
-    // Re-enable submit button and reset loading state
+  } finally {
     setLoadingState(false);
   }
 }

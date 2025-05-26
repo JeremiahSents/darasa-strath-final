@@ -48,29 +48,13 @@ async function handleRegister(e) {
       })
     });
 
-    // Get the raw response text first for debugging
-    const responseText = await response.text();
-    console.log('Raw response:', responseText);
+   const data = await response.json();
 
-    let data;
-    try {
-      data = JSON.parse(responseText);
-    } catch (e) {
-      console.error('Failed to parse response:', e);
-      throw new Error('Invalid response format');
-    }
-
-    if (!response.ok) {
-      throw new Error(data.message || `Registration failed: ${response.status}`);
-    }
-
-    // Handle successful registration
     if (data.success) {
-      localStorage.setItem('authToken', data.data.token);
-      localStorage.setItem('userData', JSON.stringify(data.data.user));
-      showMessage('Registration successful! Redirecting...', 'success');
+      showMessage('Registration successful! Redirecting to login...', 'success');
       setTimeout(() => {
-        window.location.href = '../dashboard.html';
+        // Redirect to login page instead of dashboard
+        window.location.href = 'login.html';
       }, 2000);
     } else {
       throw new Error(data.message || 'Registration failed');
@@ -83,6 +67,7 @@ async function handleRegister(e) {
     setLoadingState(false);
   }
 }
+
 
 function validateForm(fullName, email, password) {
   const errors = [];
