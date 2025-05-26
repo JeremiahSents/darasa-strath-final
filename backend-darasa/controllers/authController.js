@@ -5,65 +5,66 @@ const config = require('../middleware/config');
 
 class AuthController {
   // Register new user
-  static async register(req, res) {
-    try {
-      // Check validation results
-      const errors = validationResult(req);
-      if (!errors.isEmpty()) {
-        return res.status(400).json({
-          success: false,
-          message: 'Validation failed',
-          errors: errors.array()
-        });
-      }
+static register = async (req, res) => {
+  try {
+    console.log('Registration request body:', req.body);
 
-      const { full_name, email, password, role } = req.body;
+    const { full_name, email, password } = req.body;
 
-      // Check if user already exists
-      const existingUser = await User.findByEmail(email);
-      if (existingUser) {
-        return res.status(409).json({
-          success: false,
-          message: 'User with this email already exists'
-        });
-      }
-
-      // Create new user
-      const newUser = await User.create({
-        full_name,
-        email,
-        password,
-        role
-      });
-
-      // Generate JWT token
-      const token = jwt.sign(
-        { 
-          id: newUser.id, 
-          email: newUser.email, 
-          role: newUser.role 
-        },
-        config.jwtSecret,
-        { expiresIn: config.jwtExpiry }
-      );
-
-      res.status(201).json({
-        success: true,
-        message: 'User registered successfully',
-        data: {
-          user: newUser.toJSON(),
-          token
-        }
-      });
-
-    } catch (error) {
-      console.error('Registration error:', error);
-      res.status(500).json({
+    // Validate required fields
+    if (!full_name || !email || !password) {
+      return res.status(400).json({
         success: false,
-        message: 'Internal server error'
+        message: 'Missing required fields'
       });
     }
+
+    // Check if user already exists
+    const existingUser = await User.findByEmail(email);
+    if (existingUser) {
+      return res.status(400).json({
+        success: false,
+        message: 'Email already registered'
+      });
+    }
+
+    // Create new user
+    const user = await User.create({
+      full_name,
+      email,
+      password
+    });
+
+    // Generate JWT token
+    const token = jwt.sign(
+      { userId: user.id },
+      process.env.JWT_SECRET,
+      { expiresIn: '24h' }
+    );
+
+    // Return success response
+    res.status(201).json({
+      success: true,
+      message: 'Registration successful',
+      data: {
+        token,
+        user: {
+          id: user.id,
+          full_name: user.full_name,
+          email: user.email
+        }
+      }
+    });
+
+  } catch (error) {
+    console.error('Registration error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Registration failed',
+      error: error.message
+    });
   }
+};
 
   // Login user
   static async login(req, res) {
@@ -103,7 +104,7 @@ class AuthController {
         { 
           id: user.id, 
           email: user.email, 
-          role: user.role 
+          // role: user.role 
         },
         config.jwtSecret,
         { expiresIn: config.jwtExpiry }

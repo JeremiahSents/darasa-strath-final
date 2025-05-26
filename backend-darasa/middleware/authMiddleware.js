@@ -35,30 +35,30 @@ const authenticateToken = async (req, res, next) => {
   }
 };
 
-const requireRole = (roles) => {
-  return (req, res, next) => {
-    if (!req.user) {
-      return res.status(401).json({
-        success: false,
-        message: 'Authentication required'
-      });
-    }
+// const requireRole = (roles) => {
+//   return (req, res, next) => {
+//     if (!req.user) {
+//       return res.status(401).json({
+//         success: false,
+//         message: 'Authentication required'
+//       });
+//     }
 
-    const userRole = req.user.role;
-    const allowedRoles = Array.isArray(roles) ? roles : [roles];
+//     const userRole = req.user.role;
+//     const allowedRoles = Array.isArray(roles) ? roles : [roles];
 
-    if (!allowedRoles.includes(userRole)) {
-      return res.status(403).json({
-        success: false,
-        message: 'Insufficient permissions'
-      });
-    }
+//     if (!allowedRoles.includes(userRole)) {
+//       return res.status(403).json({
+//         success: false,
+//         message: 'Insufficient permissions'
+//       });
+//     }
 
-    next();
-  };
-};
+//     next();
+//   };
+// };
 
 module.exports = {
   authenticateToken,
-  requireRole
+  // requireRole
 };

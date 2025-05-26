@@ -1,3 +1,5 @@
+// const { set } = require("mongoose");
+
 // API Configuration - Backend server URL
 const API_BASE_URL = 'http://localhost:3000/api';
 
@@ -25,73 +27,58 @@ document.addEventListener('DOMContentLoaded', function () {
 async function handleRegister(e) {
   e.preventDefault();
 
-  // Get form data
   const fullName = nameInput.value.trim();
   const email = emailInput.value.trim();
   const password = passwordInput.value.trim();
-  // const role = roleSelect.value;
 
-  // Validate form data
-  const validationErrors = validateForm(fullName, email, password);
-  if (validationErrors.length > 0) {
-    showMessage(validationErrors.join('<br>'), 'error');
-    return;
-  }
-
-  // Disable submit button and show loading state
   setLoadingState(true);
 
   try {
-    console.log('Making request to:', `${API_BASE_URL}/auth/register`);
-
     const response = await fetch(`${API_BASE_URL}/auth/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Accept': 'application/json'
       },
+      credentials: 'include',
       body: JSON.stringify({
         full_name: fullName,
         email: email,
-        password: password,
-        // role: role
-      }) 
+        password: password
+      })
     });
 
-    console.log('Response status:', response.status);
-    console.log('Response URL:', response.url);
+    // Get the raw response text first for debugging
+    const responseText = await response.text();
+    console.log('Raw response:', responseText);
 
-    // Check if response is ok before trying to parse JSON
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+    let data;
+    try {
+      data = JSON.parse(responseText);
+    } catch (e) {
+      console.error('Failed to parse response:', e);
+      throw new Error('Invalid response format');
     }
 
-    const data = await response.json();
+    if (!response.ok) {
+      throw new Error(data.message || `Registration failed: ${response.status}`);
+    }
 
+    // Handle successful registration
     if (data.success) {
-      // Store token and user data
       localStorage.setItem('authToken', data.data.token);
       localStorage.setItem('userData', JSON.stringify(data.data.user));
-
       showMessage('Registration successful! Redirecting...', 'success');
-
-      // Redirect after successful registration
       setTimeout(() => {
-        // You can redirect to dashboard or home page
-        window.location.href = '../dashboard.html'; // Adjust path as needed
+        window.location.href = '../dashboard.html';
       }, 2000);
-
     } else {
-      if (data.errors && Array.isArray(data.errors)) {
-        const errorMessages = data.errors.map(err => err.msg).join('<br>');
-        showMessage(errorMessages, 'error');
-      } else {
-        showMessage(data.message || 'Registration failed', 'error');
-      }
+      throw new Error(data.message || 'Registration failed');
     }
 
   } catch (error) {
-    console.error('Registration error:', error);
-    showMessage('Network error. Please check your connection.', 'error');
+    console.error('Registration error details:', error);
+    showMessage(error.message || 'Registration failed. Please try again.', 'error');
   } finally {
     setLoadingState(false);
   }

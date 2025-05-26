@@ -8,54 +8,66 @@ class User {
     this.full_name = userData.full_name;
     this.email = userData.email;
     this.password = userData.password;
-    this.role = userData.role;
+    // this.role = userData.role;
     this.created_at = userData.created_at;
-    this.updated_at = userData.updated_at;
+    // this.updated_at = userData.updated_at;
   }
 
   // Create new user
   static async create(userData) {
-    const { full_name, email, password, role } = userData;
+    try {
+    const { full_name, email, password } = userData;
     
     // Hash password
     const hashedPassword = await bcrypt.hash(password, config.bcryptRounds);
     
     const { data, error } = await supabase
       .from('users')
-      .insert([{
+      .insert({
         full_name,
         email,
-        password: hashedPassword,
-        role
-      }])
-      .select('id, full_name, email, role, created_at')
+        password: hashedPassword
+      })
+      .select('id, full_name, email,created_at')
       .single();
 
-    if (error) throw error;
-    return new User(data);
+    if (error) {
+     console.error('Supabase insert error:', error);
+      throw new Error('Failed to create user');
+  }
+   return new User(data);
+    }catch (err) {
+      console.error('Error creating user:', err);
+      throw new Error('Database operation failed');
+    }
   }
 
   // Find user by email
   static async findByEmail(email) {
+    try{
     const { data, error } = await supabase
       .from('users')
       .select('*')
       .eq('email', email)
       .single();
 
-    if (error) {
-      if (error.code === 'PGRST116') return null; // No rows found
-      throw error;
-    }
+       if (error) {
+        console.error('Supabase query error:', error);
+        return null;
+      }
     
-    return new User(data);
+    return data ? new User(data) : null;
+    }catch (err) {
+      console.error('Error finding user by email:', err);
+      throw new Error('Database query failed');
+    }
   }
 
   // Find user by ID
   static async findById(id) {
     const { data, error } = await supabase
       .from('users')
-      .select('id, full_name, email, role, created_at, updated_at')
+      .select('id, full_name, email, created_at')
       .eq('id', id)
       .single();
 

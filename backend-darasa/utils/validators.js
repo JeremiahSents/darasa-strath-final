@@ -19,9 +19,9 @@ const registerValidation = [
     .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/)
     .withMessage('Password must contain at least one uppercase letter, one lowercase letter, and one number'),
   
-  body('role')
-    .isIn(['student', 'lecturer'])
-    .withMessage('Role must be either student or lecturer')
+  // body('role')
+  //   .isIn(['student', 'lecturer'])
+  //   .withMessage('Role must be either student or lecturer')
 ];
 
 const loginValidation = [
