@@ -9,7 +9,7 @@ const registerForm = document.querySelector('form');
 const nameInput = document.getElementById('name');
 const emailInput = document.getElementById('email');
 const passwordInput = document.getElementById('password');
-const roleSelect = document.getElementById('role');
+// const roleSelect = document.getElementById('role');
 const submitButton = document.querySelector('.btn');
 
 // Add event listener when DOM is loaded
@@ -29,10 +29,10 @@ async function handleRegister(e) {
   const fullName = nameInput.value.trim();
   const email = emailInput.value.trim();
   const password = passwordInput.value.trim();
-  const role = roleSelect.value;
+  // const role = roleSelect.value;
 
   // Validate form data
-  const validationErrors = validateForm(fullName, email, password, role);
+  const validationErrors = validateForm(fullName, email, password);
   if (validationErrors.length > 0) {
     showMessage(validationErrors.join('<br>'), 'error');
     return;
@@ -53,8 +53,8 @@ async function handleRegister(e) {
         full_name: fullName,
         email: email,
         password: password,
-        role: role
-      })
+        // role: role
+      }) 
     });
 
     console.log('Response status:', response.status);
@@ -97,7 +97,7 @@ async function handleRegister(e) {
   }
 }
 
-function validateForm(fullName, email, password, role) {
+function validateForm(fullName, email, password) {
   const errors = [];
 
   if (!fullName || fullName.length < 2) {
@@ -112,9 +112,9 @@ function validateForm(fullName, email, password, role) {
     errors.push('Password must be at least 6 characters long');
   }
 
-  if (!role || (role !== 'student' && role !== 'lecturer')) {
-    errors.push('Please select a valid role');
-  }
+  // if (!role || (role !== 'student' && role !== 'lecturer')) {
+  //   errors.push('Please select a valid role');
+  // }
 
   return errors;
 }

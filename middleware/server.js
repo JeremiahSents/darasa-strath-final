@@ -1,29 +1,28 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-require('dotenv').config();
+const config = require('../config/config');
 
-const authRoutes = require('./routes/auth');
+// Import routes
+const authRoutes = require('./routes/authRoutes');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors({
-  origin: [process.env.FRONTEND_URL, 'http://127.0.0.1:5500'],
+  origin: ['http://localhost:5500', 'http://127.0.0.1:5500'], // Live Server URLs
   credentials: true
 }));
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use('/api/auth', authRoutes);
 
-// Health check route
+// Health check
 app.get('/api/health', (req, res) => {
-  res.json({
-    success: true,
+  res.json({ 
+    success: true, 
     message: 'Server is running',
     timestamp: new Date().toISOString()
   });
@@ -46,6 +45,8 @@ app.use('*', (req, res) => {
   });
 });
 
+const PORT = config.port;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`API available at http://localhost:${PORT}/api`);
 });

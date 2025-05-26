@@ -1,6 +1,5 @@
-// Authentication utility functions
 class AuthUtils {
-  static API_BASE_URL = 'http://127.0.0.1:5500';
+  static API_BASE_URL = 'http://localhost:3000/api';
   
   // Get stored authentication token
   static getToken() {
@@ -24,7 +23,7 @@ class AuthUtils {
   static logout() {
     localStorage.removeItem('authToken');
     localStorage.removeItem('userData');
-    window.location.href = '/frontend/auth/login.html';
+    window.location.href = '/frontend-darasa/auth/login.html';
   }
   
   // Make authenticated API request
@@ -79,7 +78,7 @@ class AuthUtils {
   // Protect routes - redirect to login if not authenticated
   static requireAuth() {
     if (!this.isAuthenticated()) {
-      window.location.href = '/frontend/auth/login.html';
+      window.location.href = '/frontend-darasa/auth/login.html';
       return false;
     }
     return true;
