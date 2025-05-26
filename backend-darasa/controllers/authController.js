@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const { validationResult } = require('express-validator');
 const User = require('../models/User');
-const config = require('../config/config');
+const config = require('../middleware/config');
 
 class AuthController {
   // Register new user

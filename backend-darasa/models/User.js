@@ -1,6 +1,6 @@
 const supabase = require('../database/db');
 const bcrypt = require('bcryptjs');
-const config = require('../config/config');
+const config = require('../middleware/config');
 
 class User {
   constructor(userData) {

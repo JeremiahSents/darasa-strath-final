@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-const config = require('../config/config');
+const config = require('./middleware/config'); // Or just './middleware/Config/config'
 
 // Import routes
 const authRoutes = require('./routes/authRoutes');
