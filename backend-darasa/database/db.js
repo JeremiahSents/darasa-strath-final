@@ -1,3 +1,11 @@
+// import postgres from 'postgres'
+
+// const connectionString = process.env.SUPABASE_URL
+// const sql = postgres(connectionString)
+
+// export default sql
+
+
 const { createClient } = require('@supabase/supabase-js');
 require('dotenv').config();
 
@@ -11,3 +19,15 @@ if (!supabaseUrl || !supabaseKey) {
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 module.exports = supabase;
+
+// import { createClient } from "@supabase/supabase-js";
+// import dotenv from "dotenv";
+
+// dotenv.config();
+
+// const supabase = createClient(
+//   process.env.SUPABASE_URL,
+//   process.env.SUPABASE_KEY
+// );
+
+// export default supabase;
